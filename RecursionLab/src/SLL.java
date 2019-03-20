@@ -42,21 +42,20 @@ public class SLL<E> implements Reversible {
 	}
 	
 	public Pair<Node<E>> recReverse(Node<E> node){
-		if(node.getNext()==null) {
-			return new Pair<Node<E>>(node, first);
-		}
-		
-		Node<E> temp= node.getNext();
-		if(node==first) {
+		if(node.getNext().getNext()==null) {
+			addFirst(node.getNext().element);
+			size--;
 			node.setNext(null);
+			return new Pair<Node<E>>(first, node);
 		}
-		Node<E> tempNext= temp.getNext();
+		addFirst(node.getNext().element);
+		size--;
+		node.setNext(node.getNext().getNext());
+		return recReverse(node);
 		
-		temp.setNext(node);
-		return recReverse(tempNext);
-		
-		
-		
+	}
+	public int getSize() {
+		return size;
 	}
 
 
