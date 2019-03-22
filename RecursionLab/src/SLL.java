@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class SLL<E> implements Reversible {
 	
 	private static class Node<E> {
@@ -54,6 +56,27 @@ public class SLL<E> implements Reversible {
 		return recReverse(node);
 		
 	}
+	
+	public ArrayList<Pair<E>> consecutiveIncreasingPairs() { 
+		ArrayList<Pair<E>> result = new ArrayList<>();  
+		if (size > 0) recCIP(first, result); 
+		return result; 
+	}
+	
+	private ArrayList<Pair<E>> recCIP(Node<E> second, ArrayList<Pair<E>> result) {
+		if(second.getNext()==null) return result;
+
+		else if(((Comparable<E>) second.getElement()).compareTo(second.getNext().getElement())<0) {
+			result.add(new Pair<E>(second.getElement(),second.getNext().getElement()));
+			second = second.getNext();
+			return recCIP(second, result);
+		}else {			
+		second = second.getNext();
+		return recCIP(second, result);
+		}
+	}
+
+
 	public int getSize() {
 		return size;
 	}

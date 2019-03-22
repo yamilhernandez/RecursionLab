@@ -1,5 +1,5 @@
 
-public class Tester {
+public class SLLReverseTester {
 
 	public static void main(String[] args) {
 		
